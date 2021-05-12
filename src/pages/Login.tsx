@@ -79,7 +79,7 @@ const Login = () => {
               </Button>{" "}
               <Button
                 type="button"
-                onclick={() => (window.location.href = "/")}
+                onClick={() => (window.location.href = "/")}
               >
                 CANCEL
               </Button>
