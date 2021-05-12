@@ -1,7 +1,7 @@
-import * as React from "react";
+import { useState } from "react";
 import { object as yup, string } from "yup";
 import { Formik, Form, Field, FieldProps } from "formik";
-import { Button, Container } from "reactstrap";
+import { Alert, Button, Container } from "reactstrap";
 import { useHistory } from "react-router-dom";
 import { login } from "../services/api";
 
@@ -18,6 +18,8 @@ const schema = yup().shape({
 });
 
 const Login = () => {
+  const [error, setError] = useState("");
+  const [alertOpen, setAlertOpen] = useState(false);
   let history = useHistory();
 
   const handleSuccess = ({ token }: { token: string }) => {
@@ -36,12 +38,20 @@ const Login = () => {
       const result = login(variables);
       handleSuccess(result);
     } catch (error) {
-      console.error(error);
+      setError(error.message);
+      setAlertOpen(true);
     }
   };
 
   return (
     <Container>
+      <Alert
+        color="danger"
+        isOpen={alertOpen}
+        toggle={() => setAlertOpen(false)}
+      >
+        {error}
+      </Alert>
       <Formik
         initialValues={{ username: "", password: "" }}
         validationSchema={schema}
