@@ -63,7 +63,12 @@ const Login = () => {
               {({ field, meta }: FieldProps) => (
                 <div>
                   <label htmlFor="username">Email Address:</label>{" "}
-                  <input type="text" placeholder="Email Address" {...field} />
+                  <input
+                    id="username"
+                    type="text"
+                    placeholder="Email Address"
+                    {...field}
+                  />
                   {meta.touched && meta.error && (
                     <div className="error">{meta.error}</div>
                   )}
@@ -75,7 +80,7 @@ const Login = () => {
               {({ field, meta }: FieldProps) => (
                 <div>
                   <label htmlFor="password">Password:</label>{" "}
-                  <input type="password" {...field} />
+                  <input id="password" type="password" {...field} />
                   {meta.touched && meta.error && (
                     <div className="error">{meta.error}</div>
                   )}

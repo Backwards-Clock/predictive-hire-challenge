@@ -4,7 +4,7 @@ import { Container } from "reactstrap";
 const Home = () => (
   <Container>
     <p>
-      <a href="/login">Log In</a>.
+      Welcome
     </p>
   </Container>
 );
