@@ -2,6 +2,8 @@ import * as React from "react";
 import { object as yup, string } from "yup";
 import { Formik, Form, Field, FieldProps } from "formik";
 import { Button, Container } from "reactstrap";
+import { useHistory } from "react-router-dom";
+import { login } from "../services/api";
 
 interface Values {
   username: string;
@@ -16,9 +18,27 @@ const schema = yup().shape({
 });
 
 const Login = () => {
+  let history = useHistory();
+
+  const handleSuccess = ({ token }: { token: string }) => {
+    // sessionStorage is not a secure auth system but works for an example
+    sessionStorage.setItem("token", token);
+    history.push("/");
+  };
+
   const submit = (values: Values) => {
-    console.log("Login requested for", values);
-  }
+    const variables = {
+      username: values.username.toLowerCase(),
+      password: values.password,
+    };
+
+    try {
+      const result = login(variables);
+      handleSuccess(result);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <Container>
@@ -32,6 +52,7 @@ const Login = () => {
             <Field name="username" id="username">
               {({ field, meta }: FieldProps) => (
                 <div>
+                  <label htmlFor="username">Email Address:</label>{" "}
                   <input type="text" placeholder="Email Address" {...field} />
                   {meta.touched && meta.error && (
                     <div className="error">{meta.error}</div>
@@ -43,6 +64,7 @@ const Login = () => {
             <Field name={"password"} id={"password"}>
               {({ field, meta }: FieldProps) => (
                 <div>
+                  <label htmlFor="password">Password:</label>{" "}
                   <input type="password" {...field} />
                   {meta.touched && meta.error && (
                     <div className="error">{meta.error}</div>
@@ -51,7 +73,7 @@ const Login = () => {
               )}
             </Field>
             <br />
-            <div className="text-center">
+            <div>
               <Button type="submit" color="primary">
                 LOG IN
               </Button>{" "}
