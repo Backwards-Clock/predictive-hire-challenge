@@ -3,9 +3,8 @@ import { Container } from "reactstrap";
 
 const Recipes = () => (
   <Container>
-    <h1>Recipes</h1>
     <div>
-      <h1>Scones</h1>
+      <h2>Scones</h2>
       <p>Plain and simple</p>
       <p>Prep Time: 15 minutes</p>
       <p>Cook Time: 10 minutes</p>

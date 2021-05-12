@@ -10,9 +10,9 @@ const AppRouter = () => {
     <Router>
       <Switch>
         <PublicRoute header={{ title: "Home" }} component={Home} exact path="/" />
-        <Route component={Login} exact path="/login" />
-        <Route component={About} exact path="/about" />
-        <Route component={Recipes} exact path="/recipes" />
+        <PublicRoute header={{ title: "Login" }} component={Login} exact path="/login" />
+        <PublicRoute header={{ title: "About" }} component={About} exact path="/about" />
+        <PublicRoute header={{ title: "Recipes" }} component={Recipes} exact path="/recipes" />
       </Switch>
     </Router>
   );

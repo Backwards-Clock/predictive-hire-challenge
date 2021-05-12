@@ -1,12 +1,8 @@
 import React from "react";
 import { Container } from "reactstrap";
-import Menu from "../components/Menu";
-import PageHeader from "../components/PageHeader";
 
-const About = ({ path }: { path: string | string[] | undefined }) => (
+const About = () => (
   <Container>
-    <Menu path={path} />
-    <PageHeader title={"About"} />
     <p>
       An app for PredictiveHire coding challenge
     </p>
